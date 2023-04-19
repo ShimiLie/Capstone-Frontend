@@ -58,3 +58,39 @@ a {
   color: white;
   padding: 8px;
 }
+
+.header {
+  width: 100%;
+  height: auto;
+  position: fixed;
+  top: 0;
+  border-bottom: 1px solid black;
+}
+
+.header_container {
+  width: 100%;
+  height: 100%;
+  background-color: wheat;
+  display: flex;
+  margin: auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.brand-logo-header {
+  font-family: "Gran Hotel", cursive;
+  font-size: 40px;
+  color: palevioletred;
+  padding: 15px;
+}
+
+.logoutbtn {
+  border: none;
+  background-color: orange;
+  height: auto;
+  width: auto;
+  font-size: 25px;
+}
