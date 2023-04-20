@@ -1,7 +1,49 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { useFormik } from "formik";
+import { login } from "../Redux/Auth/AuthAction";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+//validation
+let schema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Email should be valid")
+    .required("Email is required"),
+  password: yup.string().required("Password is required"),
+});
 
 const Login = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const authState = useSelector((state) => state.auth);
+
+  const { user, isError, isLoading, isLoginSuccess, message } = authState;
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: schema,
+    onSubmit: (values) => {
+      dispatch(login(values));
+    },
+  });
+
+  useEffect(() => {
+    if (isLoginSuccess) {
+      navigate("/home");
+      toast.success(message);
+    } else {
+      navigate("/");
+    }
+  }, [navigate, isError, isLoading]);
+
   return (
     <div className="container">
       <div className="row w-530">
@@ -11,7 +53,7 @@ const Login = () => {
               <h1 className="brand-logo text-center">Artist Wannabe</h1>
               <br />
               <div className="col-12">
-                <form className="w-100">
+                <form className="w-100" onSubmit={formik.handleSubmit}>
                   <div className="input-group">
                     <span className="input-group-addon">
                       <i className="icofont ico font-email"></i>
@@ -22,6 +64,8 @@ const Login = () => {
                       className="form-control"
                       required
                       autoComplete="off"
+                      value={formik.values.email}
+                      onChange={formik.handleChange("email")}
                     />
                   </div>
                   <div className="input-group">
@@ -34,6 +78,8 @@ const Login = () => {
                       className="form-control"
                       required
                       autoComplete="off"
+                      value={formik.values.password}
+                      onChange={formik.handleChange("password")}
                     />
                   </div>
                   <div className="m-t-10 text-left d-flex">

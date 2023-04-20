@@ -1,7 +1,53 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import * as yup from "yup";
+import { useFormik } from "formik";
+import { register } from "../Redux/Auth/AuthAction";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+//validation
+let schema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Email should be valid")
+    .required("Email is required"),
+  name: yup.string().required("Name is required"),
+  password: yup.string().required("Password is required"),
+});
 
 const Register = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const authState = useSelector((state) => state.auth);
+
+  const { isLoading, isError, isRegisterSuccess, message } = authState;
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      name: "",
+      password: "",
+    },
+    validationSchema: schema,
+    onSubmit: (values) => {
+      console.log(values);
+      dispatch(register(values));
+    },
+  });
+
+  useEffect(() => {
+    if (isRegisterSuccess) {
+      toast.success(message);
+      navigate("/"); //to login
+    } else {
+      navigate("/register");
+      console.log("Email might have already been");
+    }
+  }, [navigate, isRegisterSuccess]);
+
   return (
     <div className="container">
       <div className="row w-530">
@@ -13,8 +59,9 @@ const Register = () => {
                 Do not signup if you want to stay in your comfort zone
               </h3>
               <br />
+              <ToastContainer />
               <div className="col-12">
-                <form className="w-100">
+                <form className="w-100" onSubmit={formik.handleSubmit}>
                   <div className="input-group">
                     <span className="input-group-addon">
                       <i className="icofont ico font-email"></i>
@@ -25,6 +72,8 @@ const Register = () => {
                       className="form-control"
                       required
                       autoComplete="off"
+                      value={formik.values.email}
+                      onChange={formik.handleChange("email")}
                     />
                   </div>
                   <div className="input-group">
@@ -37,11 +86,13 @@ const Register = () => {
                       className="form-control"
                       required
                       autoComplete="off"
+                      value={formik.values.name}
+                      onChange={formik.handleChange("name")}
                     />
                   </div>
                   <div className="input-group">
                     <span className="input-group-addon">
-                      <i className="icofont icofont-email"></i>
+                      <i className="icofont icofont-password"></i>
                     </span>
                     <input
                       type="password"
@@ -49,6 +100,8 @@ const Register = () => {
                       className="form-control"
                       required
                       autoComplete="off"
+                      value={formik.values.password}
+                      onChange={formik.handleChange("password")}
                     />
                   </div>
                   <div className="m-t-10 text-left d-flex">
