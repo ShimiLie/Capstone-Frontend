@@ -94,3 +94,125 @@ a {
   width: auto;
   font-size: 25px;
 }
+
+/* homepage */
+
+.main-container {
+  width: 100%;
+}
+
+.inner-container {
+  width: 95%;
+  height: 100%;
+  display: flex;
+  margin: auto;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.right-section {
+  width: 270px;
+  padding-top: 102px;
+  padding-left: 12px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .right-section {
+    right: 70px;
+  }
+}
+
+.post {
+  width: 610px;
+  height: auto;
+  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  margin-top: 50px;
+  background-color: white;
+  margin-bottom: 30px;
+}
+
+.p_d {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  width: 100%;
+}
+
+.p_inner {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.p_p {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid salmon;
+}
+
+.p_name {
+  color: #262626;
+  font-weight: 600;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.threedots {
+  width: 30px;
+  margin-right: 10px;
+  font-size: 16px;
+  margin-top: 16px;
+}
+
+.p-image {
+  height: 400px;
+  margin-top: 12px;
+  object-fit: cover;
+}
+
+.pp_full {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.big-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+}
+
+.d-block {
+  color: black;
+  font-weight: 600;
+}
+
+.suggestbtn {
+  font-size: 12px;
+  padding: 8px;
+  font-weight: bold;
+}
+
+.sug-avatar {
+  width: 35px;
+  height: 32px;
+  border-radius: 35px;
+}
+
+.postcontainer {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.postform {
+  width: 550px;
+  height: 400px;
+  background-color: #e8e4e8;
+  border-radius: 12px;
+}

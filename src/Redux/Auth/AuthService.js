@@ -19,7 +19,24 @@ const login = async (user) => {
   return response.data;
 };
 
+const resetnewPassword = async (email) => {
+  const response = await axios.post(`${baseUrl}/reset-password`, { email });
+  console.log(response);
+  return response.data;
+};
+
+const newPassword = async (tokenData) => {
+  const response = await axios.post(`${baseUrl}/new-password`, {
+    password: tokenData.password,
+    token: tokenData.token,
+  });
+  console.log(response);
+  return response.data;
+};
+
 export const AuthService = {
   register,
   login,
+  resetnewPassword,
+  newPassword,
 };

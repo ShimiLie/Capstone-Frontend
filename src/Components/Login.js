@@ -38,7 +38,7 @@ const Login = () => {
   useEffect(() => {
     if (isLoginSuccess) {
       navigate("/home");
-      toast.success(message);
+      // toast.success(message);
     } else {
       navigate("/");
     }
@@ -52,6 +52,7 @@ const Login = () => {
             <div className="authbox">
               <h1 className="brand-logo text-center">Artist Wannabe</h1>
               <br />
+              <ToastContainer />
               <div className="col-12">
                 <form className="w-100" onSubmit={formik.handleSubmit}>
                   <div className="input-group">

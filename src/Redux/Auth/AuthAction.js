@@ -21,3 +21,23 @@ export const login = createAsyncThunk(
     }
   }
 );
+export const resetnewPassword = createAsyncThunk(
+  "auth/reset-password",
+  async (email, thunkAPI) => {
+    try {
+      return AuthService.resetnewPassword(email);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+export const newPassword = createAsyncThunk(
+  "auth/new-password",
+  async (tokenData, thunkAPI) => {
+    try {
+      return AuthService.newPassword(tokenData);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);

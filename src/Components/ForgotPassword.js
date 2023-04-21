@@ -2,19 +2,34 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ResetPassword from "./ResetPassword";
 import { validEmail } from "../Utils/Utils";
+import { resetnewPassword } from "../Redux/Auth/AuthAction";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
 
-  // const ResetPassword = async (e) => {
-  //   e.preventDefault();
-  //   if (validEmail(email)) {
-  //     await dispatchEvent(resetnewPassword(email));
-  //   } else {
-  //     toast.error("Invalid Email");
-  //     return;
-  //   }
-  // };
+  const dispatch = useDispatch();
+  const authState = useSelector((state) => state.auth);
+  const { isError, isNewPasswordSuccess, message } = authState;
+
+  const ResetPassword = async (e) => {
+    e.preventDefault();
+    if (validEmail(email)) {
+      await dispatch(resetnewPassword(email));
+
+      if (isNewPasswordSuccess) {
+        await toast.success(message);
+        setEmail("");
+      } else if (isError) {
+        await toast.error("Something went wrong");
+      }
+    } else {
+      toast.error("Invalid Email");
+      return;
+    }
+  };
 
   return (
     <div className="container">
@@ -24,6 +39,7 @@ const ForgotPassword = () => {
             <div className="authbox">
               <h1 className="brand-logo text-center">Artist Wannabe</h1>
               <br />
+              <ToastContainer />
               <div className="col-12">
                 <form className="w-100" onSubmit={ResetPassword}>
                   <div className="input-group">

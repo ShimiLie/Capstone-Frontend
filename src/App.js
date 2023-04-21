@@ -6,6 +6,7 @@ import ForgotPassword from "./Components/ForgotPassword";
 import MainLayOut from "./Components/MainLayOut/MainLayOut";
 import Home from "./Components/Home";
 import ResetPassword from "./Components/ResetPassword";
+import CreatePost from "./Components/CreatePost/CreatePost";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
 
         <Route element={<MainLayOut />}>
           <Route path="/home" element={<Home />} />
+          <Route path="/createPosts" element={<CreatePost />} />
         </Route>
       </Routes>
     </Router>

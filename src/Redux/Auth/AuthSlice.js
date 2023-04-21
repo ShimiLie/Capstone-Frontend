@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, register } from "./AuthAction";
+import { login, newPassword, register, resetnewPassword } from "./AuthAction";
 import { getUserfromLocalStorage } from "../../Utils/Utils";
 
 const initialState = {
@@ -9,6 +9,8 @@ const initialState = {
   message: "",
   isLoginSuccess: false,
   user: getUserfromLocalStorage,
+  isNewPasswordSuccess: false,
+  isPasswordSuccess: false,
 };
 
 export const authSlice = createSlice({
@@ -41,7 +43,7 @@ export const authSlice = createSlice({
         console.log("action", action);
         state.isLoading = false;
         state.isError = false;
-        state.isRegisterSuccess = true;
+        state.isRegisterSuccess = false;
         state.isLoginSuccess = true;
         state.user = action.payload;
         state.message = action.payload.message;
@@ -51,6 +53,53 @@ export const authSlice = createSlice({
         state.isError = true;
         state.isRegisterSuccess = false;
         state.isLoginSuccess = false;
+        state.message = "";
+      })
+
+      //reset new password
+      .addCase(resetnewPassword.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(resetnewPassword.fulfilled, (state, action) => {
+        console.log("action", action);
+        state.isLoading = false;
+        state.isError = false;
+        state.isRegisterSuccess = false;
+        state.isLoginSuccess = false;
+        state.isNewPasswordSuccess = true;
+        state.user = action.payload;
+        state.message = action.payload.message;
+      })
+      .addCase(resetnewPassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isRegisterSuccess = false;
+        state.isLoginSuccess = false;
+        state.isNewPasswordSuccess = false;
+        state.message = "";
+      })
+
+      // newPassword
+      .addCase(newPassword.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(newPassword.fulfilled, (state, action) => {
+        console.log("action", action);
+        state.isLoading = false;
+        state.isError = false;
+        state.isRegisterSuccess = false;
+        state.isLoginSuccess = false;
+        state.isNewPasswordSuccess = false;
+        state.isPasswordSuccess = true;
+        state.message = action.payload.message;
+      })
+      .addCase(newPassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isRegisterSuccess = false;
+        state.isLoginSuccess = false;
+        state.isNewPasswordSuccess = false;
+        state.isPasswordSuccess = false;
         state.message = "";
       });
   },
