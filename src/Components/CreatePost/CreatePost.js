@@ -1,9 +1,17 @@
 import React, { useState } from "react";
+import { createPost } from "../../Redux/Post/PostAction";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 
 const CreatePost = () => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [image, setImage] = useState("");
+
+  const postState = useSelector((state) => state.post);
+  const { isError, isPostSuccess, message } = postState;
+  // console.log(postState);
 
   const postData = async () => {
     const data = new FormData();
@@ -16,7 +24,26 @@ const CreatePost = () => {
     })
       .then((res) => res.json())
       .then(async (data) => {
-        console.log(data);
+        // console.log(data);
+        let postdata = {
+          title,
+          body,
+          pic: data.url,
+        };
+        // console.log("check", postdata);
+
+        await dispatch(createPost(postdata));
+        if (isPostSuccess) {
+          setTitle("");
+          setBody("");
+          setImage("");
+          toast.success(message);
+        }
+      })
+      .catch((err) => {
+        if (isError) {
+          toast.error(message);
+        }
       });
   };
 
@@ -28,10 +55,11 @@ const CreatePost = () => {
             <div className="login-card card-block ">
               <div className="authbox">
                 <div className="col-12">
+                  <ToastContainer />
                   <h1 className=" text-center">Save your new drawing!</h1>
                   <br />
 
-                  {/* <div className="input-group">
+                  <div className="input-group">
                     <input
                       type="text"
                       placeholder="Title"
@@ -43,8 +71,8 @@ const CreatePost = () => {
                         setTitle(e.target.value);
                       }}
                     />
-                  </div> */}
-                  {/* <div className="input-group">
+                  </div>
+                  <div className="input-group">
                     <input
                       type="text"
                       placeholder="Description"
@@ -56,7 +84,7 @@ const CreatePost = () => {
                         setBody(e.target.value);
                       }}
                     />
-                  </div> */}
+                  </div>
                   <div className="file-field input-field">
                     <input
                       type="file"
