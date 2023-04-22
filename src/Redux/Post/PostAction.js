@@ -11,3 +11,12 @@ export const createPost = createAsyncThunk(
     }
   }
 );
+
+// getPosts
+export const getPosts = createAsyncThunk("post/getPosts", async (thunkAPI) => {
+  try {
+    return PostService.getPosts();
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error);
+  }
+});

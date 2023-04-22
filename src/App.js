@@ -7,6 +7,7 @@ import MainLayOut from "./Components/MainLayOut/MainLayOut";
 import Home from "./Components/Home";
 import ResetPassword from "./Components/ResetPassword";
 import CreatePost from "./Components/CreatePost/CreatePost";
+import PrivateRoute from "./Utils/PrivateRoute";
 
 function App() {
   return (
@@ -17,9 +18,11 @@ function App() {
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/reset/:token" element={<ResetPassword />} />
 
-        <Route element={<MainLayOut />}>
-          <Route path="/home" element={<Home />} />
-          <Route path="/createPosts" element={<CreatePost />} />
+        <Route element={<PrivateRoute />}>
+          <Route element={<MainLayOut />}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/createPosts" element={<CreatePost />} />
+          </Route>
         </Route>
       </Routes>
     </Router>
