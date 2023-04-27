@@ -19,7 +19,7 @@ export const postSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(createPost.fulfilled, (state, action) => {
-        console.log("actn", action);
+        // console.log("actn", action);
         state.isLoading = false;
         state.isError = false;
         state.isPostSuccess = true;

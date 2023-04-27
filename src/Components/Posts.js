@@ -4,13 +4,18 @@ import { timeSince } from "../Utils/Utils";
 
 const Posts = ({ post, currentUser }) => {
   return (
-    <div className="post-list">
+    <div className="post-list" style={{ backgroundColor: "plum" }}>
       <div className="post">
         <div className="p_d">
           <div className="p_inner">
             {/* <img className="p_p" alt="" src={post.pic} /> */}
             <a href="">
-              <p className="p-name">{post.title}</p>
+              <p
+                className="p-name"
+                style={{ fontSize: "35px", color: "brown" }}
+              >
+                {post.title}
+              </p>
             </a>
           </div>
           <i className="fas fa-ellipsis-h threedots"></i>

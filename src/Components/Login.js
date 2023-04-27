@@ -6,6 +6,9 @@ import { useFormik } from "formik";
 import { login } from "../Redux/Auth/AuthAction";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../Login.css";
+import { easeInOut, motion } from "framer-motion";
+import kimJungGi from "../assets/icon/kimJungGi.jfif";
 
 //validation
 let schema = yup.object().shape({
@@ -15,6 +18,17 @@ let schema = yup.object().shape({
     .required("Email is required"),
   password: yup.string().required("Password is required"),
 });
+
+const scaleVariants = {
+  whileInView: {
+    scale: [0, 1],
+    opacity: [0, 1],
+    transition: {
+      duration: 1,
+      ease: easeInOut,
+    },
+  },
+};
 
 const Login = () => {
   const navigate = useNavigate();
@@ -50,7 +64,7 @@ const Login = () => {
         <div className="col-sm-12 d-flex">
           <div className="login-card card-block auth-body">
             <div className="authbox">
-              <h1 className="brand-logo text-center">Artist Wannabe</h1>
+              <h1 className="brand-logo text-center">Uncomfortable Journal</h1>
               <br />
               <ToastContainer />
               <div className="col-12">
@@ -112,6 +126,9 @@ const Login = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="backGroundImage">
+        <p></p>
       </div>
     </div>
   );

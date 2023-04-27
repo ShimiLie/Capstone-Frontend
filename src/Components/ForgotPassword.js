@@ -20,7 +20,7 @@ const ForgotPassword = () => {
       await dispatch(resetnewPassword(email));
 
       if (isNewPasswordSuccess) {
-        await toast.success(message);
+        await toast.success("Check your mail!");
         setEmail("");
       } else if (isError) {
         await toast.error("Something went wrong");
@@ -37,7 +37,7 @@ const ForgotPassword = () => {
         <div className="col-sm-12 d-flex">
           <div className="login-card card-block auth-body">
             <div className="authbox">
-              <h1 className="brand-logo text-center">Artist Wannabe</h1>
+              <h1 className="brand-logo text-center">Uncomforatble Journal</h1>
               <br />
               <ToastContainer />
               <div className="col-12">

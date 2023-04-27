@@ -54,10 +54,11 @@ const Register = () => {
         <div className="col-sm-12 d-flex loginform">
           <div className="login-card card-block auth-body">
             <div className="authbox">
-              <h1 className="brand-logo text-center">Artist Wannabe</h1>
-              <h3 className="text-secondary text-center">
-                Do not signup if you want to stay in your comfort zone
-              </h3>
+              <h1 className="brand-logo text-center">Uncomfortable Journal</h1>
+              <h3 className="text-secondary text-center">Change</h3>
+              <h3 className="text-secondary text-center">is an</h3>
+              <h3 className="text-secondary text-center">UNCOMFORTABLE</h3>
+              <h3 className="text-secondary text-center">process always</h3>
               <br />
               <ToastContainer />
               <div className="col-12">
